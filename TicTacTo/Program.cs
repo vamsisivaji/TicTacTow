@@ -21,7 +21,7 @@ namespace TicTacTo
                 {
                     RC[R, C] = "x";
                     cont1++;
-                }
+                }//To Check Whether the index is Filled or not
                 else
                 {
                     Console.WriteLine("the space is occupied");
@@ -30,9 +30,9 @@ namespace TicTacTo
                 if(cont1==10)
                 {
                     break;
-                }
+                }//To Check The Moves are over or not
                 cont2 = 0;
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 3; i++)//To Check The whether the row is filled or not
                 {
                     if (RC[R, i] == "x")
                     {
@@ -50,53 +50,7 @@ namespace TicTacTo
                     }
                 }
                 cont2 = 0;
-                if (R==C)
-                {
-                    cont2 = 0;
-                    if (R == C && R == 1)
-                    {
-                        for (int i = 0, j = 2; i < 3; i++, j--)
-                        {
-                            if (RC[i, j] == "x")
-                            {
-                                cont2++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                            if (cont2 == 3)
-                            {
-                                Console.WriteLine("player one wins");
-                                flag = "Game Over";
-                                goto EndGame;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            if (RC[i, i] == "x")
-                            {
-                                cont2++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                            if (cont2 == 3)
-                            {
-                                Console.WriteLine("player one wins");
-                                flag = "Game Over";
-                                goto EndGame;
-                            }
-                        }
-                    }
-                    
-                }
-                cont2 = 0;
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 3; i++)//To Check The whether the Col is filled or not
                 {
 
                     if (RC[i, C] == "x")
@@ -108,6 +62,48 @@ namespace TicTacTo
                         Console.WriteLine("player one wins");
                         flag = "Game Over";
                         goto EndGame;
+                    }
+                }
+                cont2 = 0;
+                if (R == C)//To Check The Diagonally
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (RC[i, i] == "x")
+                        {
+                            cont2++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        if (cont2 == 3)
+                        {
+                            Console.WriteLine("player one wins");
+                            flag = "Game Over";
+                            goto EndGame;
+                        }
+                    }
+                }
+                cont2 = 0;
+                if (R + C == 2)//To Check The Diagonally
+                {
+                    for (int i = 0, j = 2; i < 3; i++, j--)
+                    {
+                        if (RC[i, j] == "x")
+                        {
+                            cont2++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        if (cont2 == 3)
+                        {
+                            Console.WriteLine("player one wins");
+                            flag = "Game Over";
+                            goto EndGame;
+                        }
                     }
                 }
                 Console.WriteLine("Game Scene");
@@ -124,11 +120,13 @@ namespace TicTacTo
                             Console.Write(RC[i, j]);
                         }
 
-                            
+
                     }
                     Console.WriteLine();
                 }
-            player2:
+                
+
+                player2:
                 Console.WriteLine("player 2 enter ur row and col");
                 string r1 = Console.ReadLine();
                 string c1 = Console.ReadLine();
@@ -149,7 +147,7 @@ namespace TicTacTo
                     break;
                 }
                 cont2 = 0;
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 3; i++)//To Check The whether the row is filled or not
                 {
                     if (RC[R1, i] == "o")
                     {
@@ -163,7 +161,7 @@ namespace TicTacTo
                     }
                 }
                 cont2 = 0;
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 3; i++)//To Check The whether the Col is filled or not
                 {
 
                     if (RC[i, C1] == "o")
@@ -177,6 +175,49 @@ namespace TicTacTo
                         goto EndGame;
                     }
                 }
+                cont2 = 0;
+                if (R1 == C1)//To Check The Diagonally
+                {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            if (RC[i, i] == "o")
+                            {
+                                cont2++;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                            if (cont2 == 3)
+                            {
+                                Console.WriteLine("player Two wins");
+                                flag = "Game Over";
+                                goto EndGame;
+                            }
+                        }
+                }
+                cont2 = 0;
+                if (R1+C1 == 2)//To Check The Diagonally
+                {
+                    for (int i = 0, j = 2; i < 3; i++, j--)
+                    {
+                        if (RC[i, j] == "o")
+                        {
+                            cont2++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        if (cont2 == 3)
+                        {
+                            Console.WriteLine("player Two wins");
+                            flag = "Game Over";
+                            goto EndGame;
+                        }
+                    }
+                }
+                    cont2 = 0;
                 Console.WriteLine("Game Scene");
                 for (int i = 0; i < 3; i++)
                 {
@@ -190,65 +231,26 @@ namespace TicTacTo
                         {
                             Console.Write(RC[i, j]);
                         }
-                            
+
                     }
                     Console.WriteLine();
                 }
-                cont2 = 0;
-                if (R1 == C1)
-                {
-                    if (R1 == 1)
-                    {
-                        for (int i = 0, j = 2; i < 3; i++, j--)
-                        {
-                            if (RC[i, j] == "x")
-                            {
-                                cont2++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                            if (cont2 == 3)
-                            {
-                                Console.WriteLine("player Two wins");
-                                flag = "Game Over";
-                                goto EndGame;
-                            }
-                        }
-                    }
-                    else 
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            if (RC[i, i] == "x")
-                            {
-                                cont2++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                            if (cont2 == 3)
-                            {
-                                Console.WriteLine("player Two wins");
-                                flag = "Game Over";
-                                goto EndGame;
-                            }
-                        }
-                    }
-                    
-                }
-                cont2 = 0;
-                
+
             }
             EndGame:
-            Console.WriteLine("Game Scene");
+            Console.WriteLine("End Game Scene");
             for(int i=0;i<3;i++)
             {
                 for(int j=0;j<3;j++)
                 {
-                    Console.Write(RC[i, j]);
+                    if (RC[i, j] != "x" && RC[i, j] != "o")
+                    {
+                        Console.Write("-");
+                    }
+                    else
+                    {
+                        Console.Write(RC[i, j]);
+                    }
                 }
                 Console.WriteLine();
             }
