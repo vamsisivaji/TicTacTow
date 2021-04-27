@@ -7,16 +7,15 @@ namespace TicTacTo
         static void Main(string[] args)
         {
             string[,] RC=new string[3,3];
-            string flag = null;
-            int cont1=1, cont2;
+            bool flag = false;
+            int cont1=1;
             while(cont1!=10)
             {
                 player1:
                 Console.WriteLine("player 1 enter ur row and col");
-                string r = Console.ReadLine();
-                string c = Console.ReadLine();
-                int R = Int32.Parse(r);
-                int C = Int32.Parse(c);
+                string b = Console.ReadLine();
+                int R = RandC(b,"r");
+                int C = RandC(b, "c");
                 if(RC[R,C]!="x"&&RC[R,C]!="o")
                 {
                     RC[R, C] = "x";
@@ -31,107 +30,18 @@ namespace TicTacTo
                 {
                     break;
                 }//To Check The Moves are over or not
-                cont2 = 0;
-                for (int i = 0; i < 3; i++)//To Check The whether the row is filled or not
+                flag=Check(R, C, RC,"player one");
+                GameScene(RC);
+                if(flag==true)
                 {
-                    if (RC[R, i] == "x")
-                    {
-                        cont2++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                    if (cont2 == 3)
-                    {
-                        Console.WriteLine("player one wins");
-                        flag = "Game Over";
-                        goto EndGame;
-                    }
+                    break;
                 }
-                cont2 = 0;
-                for (int i = 0; i < 3; i++)//To Check The whether the Col is filled or not
-                {
-
-                    if (RC[i, C] == "x")
-                    {
-                        cont2++;
-                    }
-                    if (cont2 == 3)
-                    {
-                        Console.WriteLine("player one wins");
-                        flag = "Game Over";
-                        goto EndGame;
-                    }
-                }
-                cont2 = 0;
-                if (R == C)//To Check The Diagonally
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if (RC[i, i] == "x")
-                        {
-                            cont2++;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                        if (cont2 == 3)
-                        {
-                            Console.WriteLine("player one wins");
-                            flag = "Game Over";
-                            goto EndGame;
-                        }
-                    }
-                }
-                cont2 = 0;
-                if (R + C == 2)//To Check The Diagonally
-                {
-                    for (int i = 0, j = 2; i < 3; i++, j--)
-                    {
-                        if (RC[i, j] == "x")
-                        {
-                            cont2++;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                        if (cont2 == 3)
-                        {
-                            Console.WriteLine("player one wins");
-                            flag = "Game Over";
-                            goto EndGame;
-                        }
-                    }
-                }
-                Console.WriteLine("Game Scene");
-                for (int i = 0; i < 3; i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (RC[i, j] != "x" && RC[i, j] != "o")
-                        {
-                            Console.Write("-");
-                        }
-                        else
-                        {
-                            Console.Write(RC[i, j]);
-                        }
-
-
-                    }
-                    Console.WriteLine();
-                }
-                
 
                 player2:
                 Console.WriteLine("player 2 enter ur row and col");
-                string r1 = Console.ReadLine();
-                string c1 = Console.ReadLine();
-                int R1 = Int32.Parse(r1);
-                int C1 = Int32.Parse(c1);
+                string b1 = Console.ReadLine();
+                int R1 = RandC(b1, "r");
+                int C1 = RandC(b1, "c");
                 if (RC[R1, C1] != "x" && RC[R1, C1] != "o")
                 {
                     RC[R1, C1] = "o";
@@ -146,102 +56,34 @@ namespace TicTacTo
                 {
                     break;
                 }
-                cont2 = 0;
-                for (int i = 0; i < 3; i++)//To Check The whether the row is filled or not
-                {
-                    if (RC[R1, i] == "o")
-                    {
-                        cont2++;
-                    }
-                    if (cont2 == 3)
-                    {
-                        Console.WriteLine("player Two wins");
-                        flag = "Game Over";
-                        goto EndGame;
-                    }
-                }
-                cont2 = 0;
-                for (int i = 0; i < 3; i++)//To Check The whether the Col is filled or not
-                {
-
-                    if (RC[i, C1] == "o")
-                    {
-                        cont2++;
-                    }
-                    if (cont2 == 3)
-                    {
-                        Console.WriteLine("player Two wins");
-                        flag = "Game Over";
-                        goto EndGame;
-                    }
-                }
-                cont2 = 0;
-                if (R1 == C1)//To Check The Diagonally
-                {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            if (RC[i, i] == "o")
-                            {
-                                cont2++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                            if (cont2 == 3)
-                            {
-                                Console.WriteLine("player Two wins");
-                                flag = "Game Over";
-                                goto EndGame;
-                            }
-                        }
-                }
-                cont2 = 0;
-                if (R1+C1 == 2)//To Check The Diagonally
-                {
-                    for (int i = 0, j = 2; i < 3; i++, j--)
-                    {
-                        if (RC[i, j] == "o")
-                        {
-                            cont2++;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                        if (cont2 == 3)
-                        {
-                            Console.WriteLine("player Two wins");
-                            flag = "Game Over";
-                            goto EndGame;
-                        }
-                    }
-                }
-                    cont2 = 0;
-                Console.WriteLine("Game Scene");
-                for (int i = 0; i < 3; i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (RC[i, j] != "x" && RC[i, j] != "o")
-                        {
-                            Console.Write("-");
-                        }
-                        else
-                        {
-                            Console.Write(RC[i, j]);
-                        }
-
-                    }
-                    Console.WriteLine();
-                }
-
+                flag = Check(R1, C1, RC, "player Two");
+                GameScene(RC);
+                /* EndGame:
+                 Console.WriteLine("End Game Scene");
+                 for(int i=0;i<3;i++)
+                 {
+                     for(int j=0;j<3;j++)
+                     {
+                         if (RC[i, j] != "x" && RC[i, j] != "o")
+                         {
+                             Console.Write("-");
+                         }
+                         else
+                         {
+                             Console.Write(RC[i, j]);
+                         }
+                     }
+                     Console.WriteLine();
+                 }*/
             }
-            EndGame:
-            Console.WriteLine("End Game Scene");
-            for(int i=0;i<3;i++)
+            
+       
+        }
+        static void GameScene(string[,] RC)
+        {
+            for (int i = 0; i < 3; i++)
             {
-                for(int j=0;j<3;j++)
+                for (int j = 0; j < 3; j++)
                 {
                     if (RC[i, j] != "x" && RC[i, j] != "o")
                     {
@@ -253,6 +95,145 @@ namespace TicTacTo
                     }
                 }
                 Console.WriteLine();
+            }
+        }
+        static bool Check(int R, int C, string[,] RC, string player)
+        {
+            int cont2 = 0;
+            for (int i = 0; i < 3; i++)//To Check The whether the row is filled or not
+            {
+                if (RC[R, i] == "x")
+                {
+                    cont2++;
+                }
+                else
+                {
+                    break;
+                }
+                if (cont2 == 3)
+                {
+                    Console.WriteLine(player + " wins");
+                    goto EndGame;
+                }
+            }
+            cont2 = 0;
+            for (int i = 0; i < 3; i++)//To Check The whether the Col is filled or not
+            {
+
+                if (RC[i, C] == "x")
+                {
+                    cont2++;
+                }
+                if (cont2 == 3)
+                {
+                    Console.WriteLine(player + " wins");
+                    goto EndGame;
+                }
+            }
+            cont2 = 0;
+            if (R == C)//To Check The Diagonally
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (RC[i, i] == "x")
+                    {
+                        cont2++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    if (cont2 == 3)
+                    {
+                        Console.WriteLine(player + " wins");
+                        goto EndGame;
+                    }
+                }
+            }
+            cont2 = 0;
+            if (R + C == 2)//To Check The Diagonally
+            {
+                for (int i = 0, j = 2; i < 3; i++, j--)
+                {
+                    if (RC[i, j] == "x")
+                    {
+                        cont2++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    if (cont2 == 3)
+                    {
+                        Console.WriteLine(player + " wins");
+                        goto EndGame;
+                    }
+                }
+            }
+        EndGame:
+            if (cont2 == 3)
+            {
+                Console.WriteLine("End Game Scene");
+                GameScene(RC);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        static int RandC(string Block,string choice)
+        {
+            int r=10, c=10;
+            switch(Block)
+            {
+                case "1":
+                    r = 0;
+                    c = 0;
+                    break;
+                case "2":
+                    r = 0;
+                    c = 1;
+                    break;
+                case "3":
+                    r = 0;
+                    c = 2;
+                    break;
+                case "4":
+                    r = 1;
+                    c = 0;
+                    break;
+                case "5":
+                    r = 1;
+                    c = 1;
+                    break;
+                case "6":
+                    r = 1;
+                    c = 2;
+                    break;
+                case "7":
+                    r = 2;
+                    c = 0;
+                    break;
+                case "8":
+                    r = 2;
+                    c = 1;
+                    break;
+                case "9":
+                    r = 2;
+                    c = 2;
+                    break;
+                default:
+                    Console.WriteLine("enter valid option");
+                    break;
+            }
+            if(choice=="r")
+            {
+                return r;
+            }
+            else
+            {
+                return c;
             }
         }
     }
