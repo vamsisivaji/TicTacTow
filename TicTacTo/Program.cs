@@ -26,12 +26,13 @@ namespace TicTacTo
                     Console.WriteLine("the space is occupied");
                     goto player1;
                 }
-                if(cont1==10)
+                flag = Check(R, C, RC, "player one");
+                GameScene(RC);
+                if (cont1==10)
                 {
+                    Console.WriteLine("out of moves");
                     break;
                 }//To Check The Moves are over or not
-                flag=Check(R, C, RC,"player one");
-                GameScene(RC);
                 if(flag==true)
                 {
                     break;
@@ -52,12 +53,19 @@ namespace TicTacTo
                     Console.WriteLine("the space is occupied");
                     goto player2;
                 }
+                flag = Check(R1, C1, RC, "player two");
+                GameScene(RC);
                 if (cont1 == 10)
+                {
+                    Console.WriteLine("out of moves");
+                    break;
+                }
+               
+                if (flag == true)
                 {
                     break;
                 }
-                flag = Check(R1, C1, RC, "player Two");
-                GameScene(RC);
+
                 /* EndGame:
                  Console.WriteLine("End Game Scene");
                  for(int i=0;i<3;i++)
@@ -87,22 +95,32 @@ namespace TicTacTo
                 {
                     if (RC[i, j] != "x" && RC[i, j] != "o")
                     {
-                        Console.Write("-");
+                        Console.Write("   ");
                     }
                     else
                     {
-                        Console.Write(RC[i, j]);
+                        Console.Write(" "+RC[i, j]+" ");
                     }
+                    if(j!=2)
+                        Console.Write("|");
                 }
+                Console.WriteLine();
+                if (i != 2)
+                    Console.WriteLine("___________");
                 Console.WriteLine();
             }
         }
         static bool Check(int R, int C, string[,] RC, string player)
         {
             int cont2 = 0;
+            string s;
+            if (player == "player one")
+                s = "x";
+            else
+                s = "o";
             for (int i = 0; i < 3; i++)//To Check The whether the row is filled or not
             {
-                if (RC[R, i] == "x")
+                if (RC[R, i] == s)
                 {
                     cont2++;
                 }
@@ -120,7 +138,7 @@ namespace TicTacTo
             for (int i = 0; i < 3; i++)//To Check The whether the Col is filled or not
             {
 
-                if (RC[i, C] == "x")
+                if (RC[i, C] == s)
                 {
                     cont2++;
                 }
@@ -135,7 +153,7 @@ namespace TicTacTo
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    if (RC[i, i] == "x")
+                    if (RC[i, i] == s)
                     {
                         cont2++;
                     }
@@ -155,7 +173,7 @@ namespace TicTacTo
             {
                 for (int i = 0, j = 2; i < 3; i++, j--)
                 {
-                    if (RC[i, j] == "x")
+                    if (RC[i, j] == s)
                     {
                         cont2++;
                     }
@@ -173,8 +191,8 @@ namespace TicTacTo
         EndGame:
             if (cont2 == 3)
             {
-                Console.WriteLine("End Game Scene");
-                GameScene(RC);
+                Console.WriteLine("End Game");
+                //GameScene(RC);
                 return true;
             }
             else
